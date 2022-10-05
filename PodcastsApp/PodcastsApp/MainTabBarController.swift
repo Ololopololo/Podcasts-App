@@ -13,6 +13,7 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         configureViewControllers()
         UINavigationBar.appearance().prefersLargeTitles = true
+        UINavigationBar.appearance().barStyle = .default
     }
 }
 
@@ -20,8 +21,8 @@ extension MainTabBarController {
     //MARK: Setup Functions
     fileprivate func configureViewControllers() {
         viewControllers = [
+            createNavigationController(with: PodcastsSearchController(), title: "Search", tabBarImage: UIImage(systemName: "magnifyingglass")!),
             createNavigationController(with: ViewController(), title: "Favorites", tabBarImage: UIImage(systemName: "star.fill")!),
-            createNavigationController(with: ViewController(), title: "Search", tabBarImage: UIImage(systemName: "magnifyingglass")!),
             createNavigationController(with: ViewController(), title: "Downloads", tabBarImage: UIImage(systemName: "arrow.down")!)
         ]
     }
@@ -29,10 +30,11 @@ extension MainTabBarController {
     fileprivate func createNavigationController(with rootViewController: UIViewController, title: String, tabBarImage: UIImage) -> UINavigationController {
         
         let navigationController = UINavigationController(rootViewController: rootViewController)
+        rootViewController.navigationItem.title = title
         navigationController.tabBarItem.image = tabBarImage
         navigationController.tabBarItem.title = title
         
         return navigationController
     }
-
+    
 }
